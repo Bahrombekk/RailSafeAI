@@ -47,7 +47,7 @@ class VehicleDetector:
             )
             return results
         except Exception as e:
-            #print(f"Aniqlashda xato: {e}")
+            print(f"Aniqlashda xato: {e}")
             return None
     
     def get_vehicle_data(self, results):
@@ -61,7 +61,17 @@ class VehicleDetector:
         
         for box in boxes:
             if hasattr(box, 'id') and box.id is not None:
-                track_id = int(box.id[0])
+                # Track ID ni to'g'ri chiqarish
+                raw_track_id = box.id[0]
+                
+                # Agar tensor bo'lsa, CPU ga o'tkazib, int ga aylantirish
+                if hasattr(raw_track_id, 'cpu'):
+                    track_id = int(raw_track_id.cpu().numpy())
+                elif hasattr(raw_track_id, 'item'):
+                    track_id = int(raw_track_id.item())
+                else:
+                    track_id = int(raw_track_id)
+                
                 class_id = int(box.cls[0])
                 x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
                 confidence = float(box.conf[0])
@@ -71,7 +81,7 @@ class VehicleDetector:
                 center_y = (y1 + y2) / 2
                 
                 vehicle_data = {
-                    'track_id': track_id,
+                    'track_id': track_id,  # Endi bu int bo'ladi
                     'class_id': class_id,
                     'class_name': CLASS_NAMES.get(class_id, 'Unknown'),
                     'bbox': (int(x1), int(y1), int(x2), int(y2)),

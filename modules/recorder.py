@@ -88,6 +88,7 @@ class VideoRecorder:
         if camera_id not in self.vehicle_recorders:
             self.vehicle_recorders[camera_id] = {}
         
+        # Agar allaqachon yozish boshlangan bo'lsa, qaytarish
         if track_id in self.vehicle_recorders[camera_id]:
             return True  # Allaqachon yozilmoqda
         

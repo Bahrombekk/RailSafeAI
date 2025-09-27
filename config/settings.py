@@ -33,35 +33,58 @@ CAMERAS = [
         'polygon_file': '/home/bahrombek/Desktop/RailSafeAI/data/polygons/paligon1.json',
         'polygon_length_meters': 8.0,  # Polygon uzunligi (metrda)
         'enabled': True,
-        'detection_active': True,  # Boshlang'ich holatda o'chirilgan
+        'detection_active': True,  # Boshlang'ich holatda yoqilgan
         'recording_active': True,
         'position': (0, 0)  # Ekranda ko'rsatish pozitsiyasi
     },
     # Qo'shimcha kameralar qo'shish mumkin:
-    # {
-    #     'id': 'cam2', 
-    #     'source': "/home/bahrombek/Desktop/RailSafeAI/data/videos/video_2025-09-25_11-09-32.mp4",  # USB kamera
-    #     'polygon_file': '/home/bahrombek/Desktop/RailSafeAI/data/polygons/paligon3.json',
-    #     'polygon_length_meters': 12.0,
-    #     'enabled': True,
-    #     'detection_active': False,
-    #     'recording_active': False,
-    #     'position': (640, 0)
-    # }
+    {
+        'id': 'cam2', 
+        'source': '/home/bahrombek/Desktop/RailSafeAI/data/videos/video_2025-09-25_11-09-32.mp4',  # Video fayl
+        'polygon_file': '/home/bahrombek/Desktop/RailSafeAI/data/polygons/paligon3.json',
+        'polygon_length_meters': 12.0,
+        'enabled': True,
+        'detection_active': True,  # Boshlang'ich holatda yoqilgan
+        'recording_active': True,
+        'position': (640, 0)
+    },
+    #{
+    #    'id': 'cam3', 
+    #    'source': '/home/bahrombek/Desktop/RailSafeAI/data/videos/video_2025-09-25_11-09-32.mp4',  # Video fayl
+    #    'polygon_file': '/home/bahrombek/Desktop/RailSafeAI/data/polygons/paligon3.json',
+    #    'polygon_length_meters': 12.0,
+    #    'enabled': True,
+    #    'detection_active': True,  # Boshlang'ich holatda yoqilgan
+    #    'recording_active': True,
+    #    'position': (640, 0)
+    #},
+    #{
+    #    'id': 'cam4', 
+    #    'source': '/home/bahrombek/Desktop/RailSafeAI/data/videos/video_2025-09-25_11-09-32.mp4',  # Video fayl
+    #    'polygon_file': '/home/bahrombek/Desktop/RailSafeAI/data/polygons/paligon3.json',
+    #    'polygon_length_meters': 12.0,
+    #    'enabled': True,
+    #    'detection_active': True,  # Boshlang'ich holatda yoqilgan
+    #    'recording_active': True,
+    #    'position': (640, 0)
+    #}
 ]
 
 # ===== MODEL SOZLAMALARI =====
-YOLO_MODEL_PATH = "/home/bahrombek/Desktop/RailSafeAI/models/best.pt"
+YOLO_MODEL_PATH = "/home/bahrombek/Desktop/RailSafeAI/models/best.onnx"
 TARGET_CLASSES = [0]  # 0 - avtomobil klassi
 
 CLASS_NAMES = {
-    0: 'Car'
+    0: 'Car',
+    1: 'Truck', 
+    2: 'Bus',
+    3: 'Motorcycle'
 }
 
 # ===== VIDEO SOZLAMALARI =====
 VIDEO_SETTINGS = {
     'codec': 'XVID',
-    'fps': 30,
+    'fps': 100,
     'quality': 95,
     'individual_vehicle_recording_duration': 10.0,  # sekundda
     'resize_display': True,  # Ko'rsatish uchun kichraytirish

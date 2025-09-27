@@ -29,17 +29,6 @@ class VehicleTracker:
         """Avtomobil ma'lumotlarini yangilash"""
         track_id = vehicle_data['track_id']
         
-        # Ensure track_id is hashable
-        if isinstance(track_id, dict):
-            if 'id' in track_id:
-                track_id = track_id['id']
-            else:
-                print(f"Error: track_id is a dict without 'id' key: {track_id}")
-                return
-        if not isinstance(track_id, (int, str)):
-            print(f"Error: track_id is not hashable: {track_id} (type: {type(track_id)})")
-            return
-        
         # Asosiy ma'lumotlarni saqlash
         vehicle_info = self.vehicle_tracking[camera_id][track_id]
         vehicle_info['class_id'] = vehicle_data['class_id']
